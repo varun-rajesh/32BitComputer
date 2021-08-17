@@ -20,7 +20,7 @@ module subtract(input[31 : 0] a, b, output[31 : 0] c, output overflow);
     .overflow (computed_overflow)
   );
 
-  mux overflow_mux(
+  two_mux overflow_mux(
     .a (1'b0),
     .b (!computed_overflow),
     .sel (skip),
