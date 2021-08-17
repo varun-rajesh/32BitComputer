@@ -10,22 +10,17 @@ module testbench;
   wire overflow;
 
   initial begin
-
     $dumpfile("testbench.vcd");
     $dumpvars;
 
-    b = 32'h1d834a9a;
-    a = 32'h23fc11e3;
-
-    #5000
-    a = 1;
-    b = 0;
+    a = 32'h1d834a9a;
+    b = 32'h23fc11e3;
 
     #5000
     a = 0;
-    b = 1;
+    b = 0;
 
-    #50 $finish;
+    #5000 $display(c);
   end
 
   subtract sub(a, b, c, overflow);
