@@ -33,6 +33,24 @@ endmodule
 
 //Single bit adder
 module sb_add(input a, b, c_in, output reg c, c_out);
-  assign c = c_in ^ (a ^ b);
-  assign c_out = (c_in & (a ^ b)) | (a & b);
+  always @ * c <= #14 c_in ^ (a ^ b);
+  always @ * c_out <= #24 (c_in & (a ^ b)) | (a & b);
+endmodule
+
+//4 bit carry look ahead adder
+module qb_add(input[3:0] a, input[3:0] b, input c_in, output[3:0] c, output c_out);
+  wire[3:0] p;
+  wire[3:0] g;
+  wire[3:0] carry;
+
+  assign p = a ^ b;
+  assign g = a & b;
+
+  assign carry[0] = c_in;
+  assign carry[1] = g[0] | (p[0] & carry[0]);
+  assign carry[2] = g[1] | (p[1] & g[0]) | (p[1] & p[0] & carry[0]);
+  assign carry[3] = g[2] | (p[2] & g[1]) | (p[2] & p[1] & g[0]) | (p[2] & p[1] & p[0] & carry[0]);
+  assign c_out = g[3] | (p[3] & g[2]) | (p[3] & p[2] & g[1]) | (p[3] & p[2] & p[1] & g[0]) | (p[3] & p[2] & p[1] & p[0] & carry[0]);
+
+  assign c = p ^ carry;
 endmodule
