@@ -75,3 +75,33 @@ module shift_right_unsigned(input[31 : 0] in, input[4 : 0] shift, output[31 : 0]
     end
   endgenerate
 endmodule
+
+module sixtyfour_shift_left(input[63 : 0] in, output[63 : 0] out);
+  integer i;
+  parameter N = 64;
+  always @ * begin
+    for(i = 0; i < N; i = i + 1) begin
+      out[i] <  = (i != 0) ? in[i - 1] : 1'b0;
+    end
+  end
+endmodule
+
+module sixtyfour_shift_right_signed(input[63 : 0] in, output[63 : 0] out);
+  integer i;
+  parameter N = 64;
+  always @ * begin
+    for(i = 0; i < N; i = i + 1) begin
+      out[i] <= (i != N - 1) ? in[i + 1] : in[63];
+    end
+  end
+endmodule
+
+module sixtyfour_shift_right_unsigned(input[63 : 0] in, output[63 : 0] out);
+  integer i;
+  parameter N = 64;
+  always @ * begin
+    for(i = 0; i < N; i = i + 1) begin
+      out[i] <= (i != N - 1) ? in[i + 1] : 1'b0;
+    end
+  end
+endmodule
