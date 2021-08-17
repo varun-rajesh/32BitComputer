@@ -26,6 +26,19 @@ module word_register(input clk, enable_in, enable_out, reset, input[31:0] data, 
 
 endmodule
 
+module two_word_register(input clk, enable_in, enable_out, reset, input[63:0] data, output[63:0] out);
+
+  sb_register sb[63:0](
+    .clk (clk),
+    .enable_in (enable_in),
+    .enable_out (enable_out),
+    .reset (reset),
+    .data (data),
+    .out (out)
+  );
+
+endmodule
+
 //set, reset, preset, clear are active low
 module sr_latch(input set, reset, preset, clear, output q, q_bar);
   assign q = ~(set & preset & q_bar);
