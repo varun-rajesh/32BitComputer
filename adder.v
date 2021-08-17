@@ -1,9 +1,9 @@
 //32 bit adder
-module add(input[31:0] a, b, output[31:0] c, output overflow);
+module add(input[31 : 0] a, b, output[31 : 0] c, output overflow);
   wire[7:0] c_out;
 
   //Size of adder
-  parameter N=32 / 4;
+  parameter N = 32 / 4;
   genvar i;
 
   assign overflow = c_out[7];
@@ -32,10 +32,10 @@ module add(input[31:0] a, b, output[31:0] c, output overflow);
 endmodule
 
 //4 bit carry look ahead adder
-module qb_add(input[3:0] a, input[3:0] b, input c_in, output[3:0] c, output c_out);
-  wire[3:0] p;
-  wire[3:0] g;
-  wire[3:0] carry;
+module qb_add(input[3 : 0] a, input[3 : 0] b, input c_in, output[3 : 0] c, output c_out);
+  wire[3 : 0] p;
+  wire[3 : 0] g;
+  wire[3 : 0] carry;
 
   assign p = a ^ b;
   assign g = a & b;
