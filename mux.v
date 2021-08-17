@@ -11,6 +11,15 @@ module word_mux(input[31 : 0] a, b, input sel, input[31 : 0] out);
   );
 endmodule
 
+module byte_mux(input[7 : 0] a, b, input sel, input[7 : 0] out);
+  mux mux[7 : 0](
+    .a (a),
+    .b (b),
+    .sel (sel),
+    .out (out)
+  );
+endmodule
+
 module thirtytwo_mux(input[31 : 0] a, input[4 : 0] sel, output out);
 
   wire a_p, b_p;
