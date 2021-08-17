@@ -1,5 +1,5 @@
 //32 bit adder
-module add(input[31 : 0] a, b, output[31 : 0] c, output overflow);
+module add(input[31 : 0] a, b, input c_in, output[31 : 0] c, output overflow);
   wire[7:0] c_out;
 
   //Size of adder
@@ -14,7 +14,7 @@ module add(input[31 : 0] a, b, output[31 : 0] c, output overflow);
         qb_add qba(
           .a (a[3 : 0]),
           .b (b[3 : 0]),
-          .c_in (1'b0),
+          .c_in (c_in),
           .c (c[3 : 0]),
           .c_out (c_out[0])
         );
