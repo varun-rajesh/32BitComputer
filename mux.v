@@ -2,7 +2,7 @@ module two_mux(input a, b, sel, output out);
   assign out = (sel & a) | (~sel & b);
 endmodule
 
-module two_word_mux(input[63 : 0] a, b, input sel, input[63 : 0] out);
+module two_word_mux(input[63 : 0] a, b, input sel, output[63 : 0] out);
   mux mux[63 : 0](
     .a (a),
     .b (b),
@@ -11,7 +11,7 @@ module two_word_mux(input[63 : 0] a, b, input sel, input[63 : 0] out);
   );
 endmodule
 
-module word_mux(input[31 : 0] a, b, input sel, input[31 : 0] out);
+module word_mux(input[31 : 0] a, b, input sel, output[31 : 0] out);
   mux mux[31 : 0](
     .a (a),
     .b (b),
@@ -20,7 +20,7 @@ module word_mux(input[31 : 0] a, b, input sel, input[31 : 0] out);
   );
 endmodule
 
-module byte_mux(input[7 : 0] a, b, input sel, input[7 : 0] out);
+module byte_mux(input[7 : 0] a, b, input sel, output[7 : 0] out);
   mux mux[7 : 0](
     .a (a),
     .b (b),
