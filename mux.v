@@ -2,13 +2,13 @@ module two_mux(input a, b, sel, output out);
   assign out = (sel & a) | (~sel & b);
 endmodule
 
-module two_word_mux(input[63 : 0] a, b, input sel, output[63 : 0] out);
-  mux mux[63 : 0](
-    .a (a),
-    .b (b),
-    .sel (sel),
-    .out (out)
-  );
+module four_word_mux(input[31 : 0] a, b, c, d, input[1 : 0] sel, output reg[31 : 0] out);
+
+  always @ * begin
+    case (sel)
+      2'b00
+  end
+
 endmodule
 
 module word_mux(input[31 : 0] a, b, input sel, output[31 : 0] out);

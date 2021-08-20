@@ -2,27 +2,38 @@
 `include "adder.v"
 `include "mux.v"
 `include "subtracter.v"
+`include "shifter.v"
+`include "counter.v"
+`include "registers.v"
+`include "multiplier.v"
+`include "divider.v"
+`include "ram.v"
+`include "computer.v"
+`include "all_registers.v"
+`include "alu.v"
 
 module testbench;
 
-  reg[31:0] a, b;
-  wire[31:0] c;
-  wire overflow;
-
+  reg clk, reset;
+  reg[1023 : 0] code;
   initial begin
     $dumpfile("testbench.vcd");
     $dumpvars;
 
-    a = 32'h1d834a9a;
-    b = 32'h23fc11e3;
+    //in = 64'hf3002e4;
+    code = {32'h09123898, 32'h109adf12, 32'h21439802, 32'hda129586, 32'h01892fe7, 32'h04792930};
+    clk = 0;
+    reset = 0;
 
-    #5000
-    a = 0;
-    b = 0;
+    #10 reset = 1;
+    #5000 reset = 0;
 
-    #5000 $display(c);
+    #5 $finish;
   end
 
-  subtract sub(a, b, c, overflow);
+  always begin
+    #5 clk = !clk;
+  end
 
+  computer computer(clk, reset, code);
 endmodule

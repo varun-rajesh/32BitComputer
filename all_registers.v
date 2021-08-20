@@ -1,4 +1,4 @@
-module all_registers(input clk, input reset, input[6 : 0] read_a, read_b, write_select, input[31 : 0] write_in, output[31 : 0] out_a, out_b);
+module all_registers(input clk, input reset, input[5 : 0] read_a, read_b, write_select, input[31 : 0] write_in, output[31 : 0] out_a, out_b);
 
   parameter N = 32;
   genvar i;
