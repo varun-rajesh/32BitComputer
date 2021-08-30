@@ -1,39 +1,37 @@
 `timescale 1 ns/1 ns
-`include "adder.v"
 `include "mux.v"
-`include "subtracter.v"
-`include "shifter.v"
-`include "counter.v"
+`include "shifters.v"
 `include "registers.v"
-`include "multiplier.v"
-`include "divider.v"
-`include "ram.v"
-`include "computer.v"
 `include "all_registers.v"
+`include "computer.v"
 `include "alu.v"
+`include "adder.v"
+`include "divider.v"
+`include "subtracter.v"
+`include "multiplier.v"
+`include "ram.v"
 
 module testbench;
-
   reg clk, reset;
-  reg[1023 : 0] code;
+  reg[65535 : 0] code;
+
   initial begin
     $dumpfile("testbench.vcd");
     $dumpvars;
 
-    //in = 64'hf3002e4;
-    code = {32'h09123898, 32'h109adf12, 32'h21439802, 32'hda129586, 32'h01892fe7, 32'h04792930};
-    clk = 0;
-    reset = 0;
+    clk = 1'b0;
+    reset = 1'b0;
+    code = {32'h0422af43, 32'h2401000f};
+    #10 reset = 1'b1;
 
-    #10 reset = 1;
-    #5000 reset = 0;
+    #500 reset = 1'b0;
 
-    #5 $finish;
+    #10 $finish;
   end
 
   always begin
     #5 clk = !clk;
   end
 
-  computer computer(clk, reset, code);
+  computer c(clk, reset, code);
 endmodule

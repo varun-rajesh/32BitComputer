@@ -21,18 +21,7 @@ module counter(input clk, reset, load, input[31:0] limit, load_val, output[31:0]
     .overflow ()
   );
 
-  word_mux mux0(
-    .a (32'b0),
-    .b (count_p),
-    .sel (count_p == limit),
-    .out (n)
-  );
-
-  word_mux mux1(
-    .a (load_val),
-    .b (n),
-    .sel (load),
-    .out (m)
-  );
+  assign n = (count_p == limit) ? 32'b0 : count_p;
+  assign m = (load) ? load_val : n;
 
 endmodule

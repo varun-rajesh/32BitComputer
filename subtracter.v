@@ -20,18 +20,7 @@ module subtract(input[31 : 0] a, b, output[31 : 0] c, output overflow);
     .overflow (computed_overflow)
   );
 
-  two_mux overflow_mux(
-    .a (1'b0),
-    .b (!computed_overflow),
-    .sel (skip),
-    .out (overflow)
-  );
-
-  word_mux difference_mux(
-    .a (a),
-    .b (computed_c),
-    .sel (skip),
-    .out (c)
-  );
+  assign overflow = (skip) ? 1'b0 : !computed_overflow;
+  assign c = (skip) ? a : computed_c;
 
 endmodule

@@ -13,8 +13,9 @@ module sb_register(input clk, enable_in, enable_out, reset, data, output out);
   );
 endmodule
 
-module two_out_sb_register(input clk, enable_in, enable_out_a, enable_out_b, reset, data, output out_a, output out_b);
+module sb_two_out_register(input clk, enable_in, enable_out_a, enable_out_b, reset, data, output out_a, out_b);
   wire q;
+
   assign out_a = (enable_out_a) ? q : 1'bZ;
   assign out_b = (enable_out_b) ? q : 1'bZ;
 
@@ -26,12 +27,10 @@ module two_out_sb_register(input clk, enable_in, enable_out_a, enable_out_b, res
     .q (q),
     .q_bar ()
   );
-
 endmodule
 
 module word_register(input clk, enable_in, enable_out, reset, input[31 : 0] data, output[31 : 0] out);
-
-  sb_register sb[31 : 0](
+  sb_register registers[31 : 0](
     .clk (clk),
     .enable_in (enable_in),
     .enable_out (enable_out),
@@ -39,12 +38,10 @@ module word_register(input clk, enable_in, enable_out, reset, input[31 : 0] data
     .data (data),
     .out (out)
   );
-
 endmodule
 
-module two_out_word_register(input clk, enable_in, enable_out_a, enable_out_b, reset, input[31 : 0] data, output[31 : 0] out_a, out_b);
-
-  two_out_sb_register tsb[31 : 0](
+module word_two_out_register(input clk, enable_in, enable_out_a, enable_out_b, reset, input[31 : 0] data, output[31 : 0] out_a, out_b);
+  sb_two_out_register registers[31 : 0](
     .clk (clk),
     .enable_in (enable_in),
     .enable_out_a (enable_out_a),
@@ -54,20 +51,6 @@ module two_out_word_register(input clk, enable_in, enable_out_a, enable_out_b, r
     .out_a (out_a),
     .out_b (out_b)
   );
-
-endmodule
-
-module two_word_register(input clk, enable_in, enable_out, reset, input[63 : 0] data, output[63 : 0] out);
-
-  sb_register sb[63 : 0](
-    .clk (clk),
-    .enable_in (enable_in),
-    .enable_out (enable_out),
-    .reset (reset),
-    .data (data),
-    .out (out)
-  );
-
 endmodule
 
 //set, reset, preset, clear are active low
