@@ -4,7 +4,7 @@ A 5 stage pipelined 32-bit RISC processor with a MIPS derived instruction set. H
 
 ## Instruction Set
 
-All instructions are 32 bits in length
-Add: 6'b0, rs (5), rt (5), rd (5), 5'b0, 6'b1; rd <= rs + rt;
-Add immediate: 6'b1, rs (5), rt(5), immediate (16); rt <= rs + immediate;
+All instructions are 32 bits in length\
+Add: 6'b0, rs (5), rt (5), rd (5), 5'b0, 6'b1; rd <= rs + rt\
+Add immediate: 6'b1, rs (5), rt(5), immediate (16); rt <= rs + immediate\
 
