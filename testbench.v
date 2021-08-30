@@ -5,13 +5,14 @@
 `include "all_registers.v"
 `include "computer.v"
 `include "alu.v"
-`include "ram.v"
+`include "adder.v"
+`include "divider.v"
+`include "subtracter.v"
 `include "multiplier.v"
+`include "ram.v"
 
 module testbench;
-  reg clk, reset, read_enable, write_enable;
-  reg[31 : 0] address, data_in;
-  wire[31 : 0] data_out;
+  reg clk, reset;
   reg[65535 : 0] code;
 
   initial begin
@@ -20,10 +21,6 @@ module testbench;
 
     clk = 1'b0;
     reset = 1'b0;
-    write_enable = 1'b1;
-    read_enable = 1'b1;
-    address = 32'hf203fe33;
-    data_in = 32'h01010101;
     code = {32'h0422af43, 32'h2401000f};
     #10 reset = 1'b1;
 
@@ -37,5 +34,4 @@ module testbench;
   end
 
   computer c(clk, reset, code);
-  //sram ram(clk, read_enable, write_enable, address, data_in, data_out);
 endmodule
