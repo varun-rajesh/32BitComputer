@@ -2,6 +2,7 @@
 #include <string.h>
 #include <stdlib.h>
 
+//read function for r-type instructions
 void read_r(int *instruction) {
   char *token;
   char* stripped_token;
@@ -27,6 +28,7 @@ void read_r(int *instruction) {
   *instruction |= op_3 << 16;
 }
 
+//read function for i-type instructions
 void read_i(int *instruction) {
   char *token;
   char* stripped_token;
@@ -51,6 +53,7 @@ void read_i(int *instruction) {
   *instruction |= op_3;
 }
 
+//read function for s-type instructions
 void read_s(int *instruction) {
   char *token;
   char* stripped_token;
@@ -75,6 +78,7 @@ void read_s(int *instruction) {
   *instruction |= op_3 << 6;
 }
 
+//read function for move low instruction
 void read_m(int *instruction) {
   char *token;
   char* stripped_token;
@@ -87,6 +91,7 @@ void read_m(int *instruction) {
   *instruction |= op_1 << 16;
 }
 
+//read function for jump to register instruction
 void read_jr(int *instruction) {
   char *token;
   char* stripped_token;
@@ -99,6 +104,7 @@ void read_jr(int *instruction) {
   *instruction |= op_1 << 21;
 }
 
+//read function for j-type instructions
 void read_j(int *instruction) {
   char *token;
   char* stripped_token;
@@ -112,7 +118,7 @@ void read_j(int *instruction) {
 int main(int argc, char *args[]) {
   #define CHUNK 60
   FILE *file_read = fopen(args[1], "r");
-  FILE *file_write = fopen(args[2]), "w+");
+  FILE *file_write = fopen(args[2], "w+");
   unsigned int instruction;
   unsigned int temp_instruction;
   int* instructions;
@@ -128,7 +134,6 @@ int main(int argc, char *args[]) {
   int i = 0;
 
   instructions = calloc(size, sizeof(int));
-  printf("address: %d\n", instructions);
 
   if (file_read == NULL || file_write == NULL) {
     perror("");
@@ -219,6 +224,7 @@ int main(int argc, char *args[]) {
 
     *(instructions + i) = instruction;
 
+    //dynamic array size increasing
     i = i + 1;
     if (i == size) {
       size = size * 2;
@@ -230,7 +236,6 @@ int main(int argc, char *args[]) {
   fputs("{", file_write);
   for(int j = i - 1; j >= 0; j = j - 1) {
     temp_instruction = *(instructions + j);
-    printf("instruction to write: %d, %d\n", j, temp_instruction);
     if (j != 0) fprintf(file_write, "32'd%u, ", temp_instruction);
     else fprintf(file_write, "32'd%u", temp_instruction);
   }
