@@ -5,6 +5,13 @@ A 5 stage pipelined 32-bit RISC processor with a MIPS derived instruction set.
 The processor has 32 general purpose registers with reigster $0 permanently set to 0 and register $31 reserved for jump-and-link instruction.
 
 ## Instructions
+
+To turn assembly into machine code, compile the assembler.c:
+ gcc assembler.c -o assembler
+
+And pass input assembly file and output machine code file to the executable:
+ assembler assembly_instruction_input machine_code_output
+
 | Category           | Instruction         | Example             | Meaning                                |
 |--------------------|---------------------|---------------------|----------------------------------------|
 | Arithmetic         | add                 | add $r1, $r2, $r3   | $r1 = $r2 + $r3                        |
