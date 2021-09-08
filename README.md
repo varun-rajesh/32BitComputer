@@ -11,6 +11,8 @@ To turn assembly into machine code, compile the assembler.c:
 
 And pass input assembly file and output machine code file to the executable:
  ```assembler assembly_instruction_input machine_code_output```
+ 
+The output found in machine_code_output can be passed to the instruction declaration in testbench.v
 
 | Category           | Instruction         | Example             | Meaning                                |
 |--------------------|---------------------|---------------------|----------------------------------------|
