@@ -39,5 +39,5 @@ The output found in machine_code_output can be passed to the instruction declara
 | Conditional branch   | set on less than immediate | slti $r1, $r2, 20   | if ($r1 < 20) $r3 = 1                  |
 | Unconditional branch | jump                       | j 2500              | goto 10000                             |
 | Unconditional branch | jump to reg                | jr $r1              | goto $r1                               |
-| Unconditional branch | jump and link              | jal $2500           | $31 = PC + 4; go to 10000  
+| Unconditional branch | jump and link              | jal 2500           | $31 = PC + 4; go to 10000  
 
