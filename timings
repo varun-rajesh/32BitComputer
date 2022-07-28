@@ -1,4 +1,0 @@
-2, xor - sn74hcs86: t_pd = 7 ns;
-2, and - sn74hcs09: t_pd = 10 ns;
-4, and - sn74hcs21: t_pd = 9 ns;
-2, or - sn74hcs32: t_pd = 7 ns;
